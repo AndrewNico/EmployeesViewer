@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище testModel" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="Хранилище testModelContainer">
+          <EntitySet Name="deps" EntityType="Хранилище testModel.deps" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="persons" EntityType="Хранилище testModel.persons" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="posts" EntityType="Хранилище testModel.posts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="status" EntityType="Хранилище testModel.status" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="Хранилище testModel.sysdiagrams" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="deps">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="persons">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="second_name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="last_name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="date_employ" Type="datetime" />
+          <Property Name="date_uneploy" Type="datetime" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="id_dep" Type="int" Nullable="false" />
+          <Property Name="id_post" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="posts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Function Name="GetEmployeesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetEmpsStats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="per_begin" Type="datetime" Mode="In" />
+          <Parameter Name="per_end" Type="datetime" Mode="In" />
+          <Parameter Name="need_status" Type="varchar" Mode="In" />
+          <Parameter Name="hire_status" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="testModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="testEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="deps" EntityType="testModel.deps" />
+          <EntitySet Name="persons" EntityType="testModel.persons" />
+          <EntitySet Name="posts" EntityType="testModel.posts" />
+          <EntitySet Name="status" EntityType="testModel.status" />
+          <EntitySet Name="sysdiagrams" EntityType="testModel.sysdiagrams" />
+          <FunctionImport Name="GetEmployeesList" ReturnType="Collection(testModel.GetEmployeesList_Result)" />
+          <FunctionImport Name="GetEmpsStats" ReturnType="Collection(testModel.GetEmpsStats_Result)">
+            <Parameter Name="per_begin" Mode="In" Type="DateTime" />
+            <Parameter Name="per_end" Mode="In" Type="DateTime" />
+            <Parameter Name="need_status" Mode="In" Type="String" />
+            <Parameter Name="hire_status" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="deps">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="persons">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="second_name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="date_employ" Type="DateTime" Precision="3" />
+          <Property Name="date_uneploy" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="id_dep" Type="Int32" Nullable="false" />
+          <Property Name="id_post" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="posts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <ComplexType Name="GetEmployeesList_Result">
+          <Property Type="String" Name="emp_fullname" Nullable="true" MaxLength="105" />
+          <Property Type="String" Name="emp_status" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="emp_dept" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="emp_post" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="date_emp" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="date_unemp" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="GetEmpsStats_Result">
+          <Property Type="String" Name="date_per" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="emp_cou" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище testModelContainer" CdmEntityContainer="testEntities">
+          <EntitySetMapping Name="deps">
+            <EntityTypeMapping TypeName="testModel.deps">
+              <MappingFragment StoreEntitySet="deps">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="persons">
+            <EntityTypeMapping TypeName="testModel.persons">
+              <MappingFragment StoreEntitySet="persons">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="second_name" ColumnName="second_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="date_employ" ColumnName="date_employ" />
+                <ScalarProperty Name="date_uneploy" ColumnName="date_uneploy" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="id_dep" ColumnName="id_dep" />
+                <ScalarProperty Name="id_post" ColumnName="id_post" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="posts">
+            <EntityTypeMapping TypeName="testModel.posts">
+              <MappingFragment StoreEntitySet="posts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="testModel.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="testModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeesList" FunctionName="Хранилище testModel.GetEmployeesList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="testModel.GetEmployeesList_Result">
+                <ScalarProperty Name="emp_fullname" ColumnName="emp_fullname" />
+                <ScalarProperty Name="emp_status" ColumnName="emp_status" />
+                <ScalarProperty Name="emp_dept" ColumnName="emp_dept" />
+                <ScalarProperty Name="emp_post" ColumnName="emp_post" />
+                <ScalarProperty Name="date_emp" ColumnName="date_emp" />
+                <ScalarProperty Name="date_unemp" ColumnName="date_unemp" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmpsStats" FunctionName="Хранилище testModel.GetEmpsStats">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="testModel.GetEmpsStats_Result">
+                <ScalarProperty Name="date_per" ColumnName="date_per" />
+                <ScalarProperty Name="emp_cou" ColumnName="emp_cou" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
